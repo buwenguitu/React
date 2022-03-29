@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .h {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <!-- 引入react库 -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入react-dom库 用于操作dom -->
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+      //   创建函数式组件
+      //首字母必须大写,函数必须要有返回值
+      function MyComponent() {
+        console.log(this); //此处的this是undefined,因为babel转译后开启了严格模式
+        return <h1>函数式组件</h1>;
+      }
+      //   渲染组件到页面
+      ReactDOM.render(<MyComponent />, document.getElementById("test"));
+      //执行了ReactDOM.render后发生了什么?
+      //1.React解析组件标签,找到MyComponent组件
+      //2.发现是函数式组件.随即调用函数,将返回的虚拟dom转换为真实dom,再渲染至页面
+    </script>
+  </body>
+</html>

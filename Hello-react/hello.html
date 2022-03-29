@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .h {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <!-- 引入react库 -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入react-dom库 用于操作dom -->
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 创建虚拟dom JSX
+      /*
+          虚拟dom实际就是一个Object   虚拟dom的属性没有真实dom的属性多  React会将虚拟dom转换为真实dom渲染在页面上
+          JSX语法:
+            1.定义虚拟dom时不要加引号
+            2.混入js表达式的话要用{}
+            3.使用class要用className
+            4.使用内联样式要用style={{ color: "pink" }} 注意小驼峰命名
+            5.只有一个根标签
+            6.标签必须闭合
+      */
+      const id = "div-test";
+      const virtualDom = (
+        <div id={id}>
+          <h1 className="h">Hello,React</h1>
+          <h2 style={{ color: "pink" }}>Hello,React</h2>
+          <h3>Hello,React</h3>
+          <h4>Hello,React</h4>
+          <h5>Hello,React</h5>
+          <h6>Hello,React</h6>
+          <input type="text" />
+        </div>
+      );
+      // 使用ReactDOM渲染至页面
+      ReactDOM.render(virtualDom, document.getElementById("test"));
+    </script>
+  </body>
+</html>

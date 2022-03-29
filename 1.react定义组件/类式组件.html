@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .h {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <!-- 引入react库 -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入react-dom库 用于操作dom -->
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+      // 创建类式组件
+      class MyComponent extends React.Component {
+        //render在哪里? --MyComponent的原型对象上,供实例使用
+        //render中的this是谁? --MyComponent的实例对象 == MyComponent组件实例对象
+        render() {
+          return <h1>类组件</h1>;
+        }
+      }
+      // 渲染组件到页面
+      ReactDOM.render(<MyComponent />, document.getElementById("test"));
+      //执行了ReactDOM.render后发生了什么?
+      //1.React解析组件标签,找到MyComponent组件
+      //2.发现是类式组件.随即new出来该类的实例,并通过该实例调用到原型上的render方法,将render返回的虚拟dom转为真实dom,再渲染至页面
+    </script>
+  </body>
+</html>

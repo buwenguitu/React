@@ -30,7 +30,8 @@
     <script type="text/babel">
       //  创建组件
       class Weather extends React.Component {
-        //   构造器调用几次? -- 1次
+        // 构造器调用几次? -- 1次
+        // 构造器是否接收props,是否传递给super,取决于是否希望在构造器中通过this取访问props
         constructor(props) {
           super(props);
           this.state = { isHot: false };

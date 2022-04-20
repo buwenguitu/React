@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .h {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <!-- 引入react库 -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入react-dom库 用于操作dom -->
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- 引入prop-types 用于对标签props进行限制-->
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
+    <script type="text/babel">
+      //  创建组件
+      class Demo extends React.Component {
+        /*
+          1.通过onXxxx指定事件的处理函数(注意区分大小写)
+            a.React使用的是自定义(合成)事件,而不是使用原生DOM事件----为了更好的兼容性
+            b.React中的事件是通过 事件委托方式处理的(委托给最外层的原素)
+          2.通过event.target拿到发生事件的DOM---不要过度的使用ref
+        */
+
+        //创建ref容器
+        myRef = React.createRef();
+        // 展示👈侧数据
+        showData = () => {
+          this.myRef.current.value && alert(this.myRef.current.value);
+        };
+        // 展示👉侧数据
+        blurData = (event) => {
+          event.target.value && alert(event.target.value);
+        };
+        // 渲染函数
+        render() {
+          return (
+            <div>
+              <input
+                ref={this.myRef}
+                type="text"
+                placeholder="点击按钮提示数据"
+              />
+              <button onClick={this.showData}>点我提示左侧数据</button>
+              <input
+                onBlur={this.blurData}
+                type="text"
+                placeholder="失去焦点提示数据"
+              />
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<Demo />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

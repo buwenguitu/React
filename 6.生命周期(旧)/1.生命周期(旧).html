@@ -1,0 +1,87 @@
+<!--
+ * @Author: LJL liangjialing@dgg.net
+ * @Date: 2022-05-12 18:45:13
+ * @LastEditors: LJL liangjialing@dgg.net
+ * @LastEditTime: 2022-05-12 19:05:25
+ * @FilePath: \react\6.生命周期(旧)\1.生命周期(旧).html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <!-- 引入react库 -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入react-dom库 用于操作dom -->
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入babel 用于将jsx转为js -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- 引入prop-types 用于对标签props进行限制-->
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
+    <script type="text/babel">
+      //创建组件;
+      class A extends React.Component {
+        //构造器
+        constructor(props) {
+          console.log("A---constructor---构造器");
+          super(props);
+          //设置状态
+          this.state = { test: false };
+        }
+
+        // 点击按钮卸载组件
+        uninstall = () => {
+          ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+        };
+
+        //组件将要挂载
+        componentWillMount() {
+          console.log("A---componentWillMount---组件将要挂载");
+        }
+
+        // 组件已经挂载完成
+        componentDidMount() {
+          console.log("A---componentDidMount---组件已经挂载完成");
+        }
+
+        // 组件即将更新
+        shouldComponentUpdate() {
+          console.log("A---shouldComponentUpdate---组件即将更新");
+          return true;
+        }
+
+        // 组件即将卸载
+        componentWillUnmount() {
+          console.log("A---componentWillMount---组件即将卸载");
+        }
+
+        //渲染函数
+        render() {
+          console.log("A--render--组件即将渲染");
+          return (
+            <div>
+              test
+              <button onClick={this.uninstall}>点我卸载组件</button>
+            </div>
+          );
+        }
+      }
+      //渲染组件
+      ReactDOM.render(<A />, document.getElementById("test"));
+    </script>
+  </body>
+</html>

@@ -2,7 +2,7 @@
  * @Author: LJL liangjialing@dgg.net
  * @Date: 2022-05-12 18:45:13
  * @LastEditors: LJL liangjialing@dgg.net
- * @LastEditTime: 2022-05-12 19:05:25
+ * @LastEditTime: 2022-05-13 17:43:11
  * @FilePath: \react\6.生命周期(旧)\1.生命周期(旧).html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -40,12 +40,13 @@
           console.log("A---constructor---构造器");
           super(props);
           //设置状态
-          this.state = { test: false };
+          this.state = { car: "奔驰" };
         }
 
         // 点击按钮卸载组件
         uninstall = () => {
-          ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+          // ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+          this.setState({ car: "奥拓" });
         };
 
         //组件将要挂载
@@ -58,7 +59,7 @@
           console.log("A---componentDidMount---组件已经挂载完成");
         }
 
-        // 组件即将更新
+        // 组件是否更新 必须返回一个布尔值 true执行  false则不再执行
         shouldComponentUpdate() {
           console.log("A---shouldComponentUpdate---组件即将更新");
           return true;
@@ -75,11 +76,28 @@
           return (
             <div>
               test
-              <button onClick={this.uninstall}>点我卸载组件</button>
+              <button onClick={this.uninstall}>
+                点我卸载组件{this.state.car}
+              </button>
+              <B car={this.state.car} />
             </div>
           );
         }
       }
+
+      class B extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+
+        shouldComponentUpdate() {
+          return true;
+        }
+        render() {
+          return <div>{this.props.car}</div>;
+        }
+      }
+
       //渲染组件
       ReactDOM.render(<A />, document.getElementById("test"));
     </script>

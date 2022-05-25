@@ -2,7 +2,7 @@
  * @Author: LJL liangjialing@dgg.net
  * @Date: 2022-05-12 18:45:13
  * @LastEditors: LJL liangjialing@dgg.net
- * @LastEditTime: 2022-05-13 17:43:11
+ * @LastEditTime: 2022-05-25 18:38:02
  * @FilePath: \react\6.生命周期(旧)\1.生命周期(旧).html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -90,9 +90,24 @@
           super(props);
         }
 
-        shouldComponentUpdate() {
-          return true;
+        // props更新后触发
+        componentWillReceiveProps(props) {
+          console.log(
+            "🚀 ~ file: 1.生命周期(旧).html ~ componentWillReceiveProps ~ props",
+            props
+          );
         }
+
+        // 组件即将更新
+        componentWillUpdate() {
+          console.log("🚀 ~ file: 1.生命周期(旧).html  ~ componentWillUpdate ");
+        }
+
+        // 组件已经更新完
+        componentDidUpdate() {
+          console.log("🚀 ~ file: 1.生命周期(旧).html ~ componentDidUpdate ");
+        }
+
         render() {
           return <div>{this.props.car}</div>;
         }

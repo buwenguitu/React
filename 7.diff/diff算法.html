@@ -2,7 +2,7 @@
  * @Author: LJL liangjialing@dgg.net
  * @Date: 2022-04-24 08:59:13
  * @LastEditors: PC-20220916IUOV\Administrator 12312@qq.com
- * @LastEditTime: 2022-11-08 15:25:47
+ * @LastEditTime: 2022-11-08 20:00:28
  * @FilePath: \react\4.收集表单数据\受控组件.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -53,6 +53,7 @@
         };
 
         // diffing算法最小粒度是标签 不使用index作为key,因为节点中途发生变化  会重新渲染整个DOM树 造成性能问题  尽量使用唯一的值作为key
+        // 如果是简单渲染数据无操作并无输入类的DOM(input,radio,checkBox) 可以使用index做key
         render() {
           return (
             <div>

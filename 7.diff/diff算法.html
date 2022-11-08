@@ -1,9 +1,9 @@
 <!--
  * @Author: LJL liangjialing@dgg.net
- * @Date: 2022-04-22 09:31:20
+ * @Date: 2022-04-24 08:59:13
  * @LastEditors: PC-20220916IUOV\Administrator 12312@qq.com
- * @LastEditTime: 2022-11-07 14:04:11
- * @FilePath: \react\4.收集表单数据\非受控组件.html
+ * @LastEditTime: 2022-11-08 15:25:47
+ * @FilePath: \react\4.收集表单数据\受控组件.html
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <!DOCTYPE html>
@@ -13,11 +13,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      .h {
-        color: red;
-      }
-    </style>
   </head>
   <body>
     <div id="test"></div>
@@ -38,41 +33,45 @@
     <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
 
     <script type="text/babel">
-      // 利用ref，使用的时候采取收集需要的值，就叫非受控组件
-      // 创建组件
-      class Login extends React.Component {
-        handleSubmit = (event) => {
-          const { userName, password } = this;
-          event.preventDefault();
-          alert(
-            `你的用户名是${userName.value},你输入的密码是${password.value}`
-          );
+      class Person extends React.Component {
+        // 基础数据
+        state = {
+          person: [
+            { id: 1, name: "张三", age: 19 },
+            { id: 2, name: "里斯", age: 20 },
+          ],
         };
+
+        // 添加一个小人
+        add = () => {
+          let newName = {
+            id: this.state.person.length + 1,
+            name: "哈哈",
+            age: 21,
+          };
+          this.setState({ person: [newName, ...this.state.person] });
+        };
+
+        // diffing算法最小粒度是标签 不使用index作为key,因为节点中途发生变化  会重新渲染整个DOM树 造成性能问题  尽量使用唯一的值作为key
         render() {
           return (
-            <form
-              action="http://www.baidu.com"
-              method="get"
-              onSubmit={this.handleSubmit}
-            >
-              用户名:
-              <input
-                ref={(c) => (this.userName = c)}
-                type="text"
-                name="userName"
-              />
-              密码:
-              <input
-                ref={(c) => (this.password = c)}
-                type="password"
-                name="password"
-              />
-              <button>提交</button>
-            </form>
+            <div>
+              <button onClick={this.add}>加个人</button>
+              <ul>
+                {this.state.person.map((item) => {
+                  return (
+                    <li key={item.id}>
+                      {item.name}
+                      {item.age}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           );
         }
       }
-      ReactDOM.render(<Login />, document.getElementById("test"));
+      ReactDOM.render(<Person />, document.getElementById("test"));
     </script>
   </body>
 </html>
